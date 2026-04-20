@@ -20,6 +20,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html
+            cd portfolio
             git pull origin main
             sudo systemctl restart nginx
