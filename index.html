@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satvik — DevOps & Cloud Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F0;
+      --surface: #FFFFFF;
+      --text: #1A1A18;
+      --muted: #6B6B66;
+      --accent: #2A4A3E;
+      --accent-light: #E8EFE9;
+      --border: rgba(26,26,24,0.1);
+      --tag-bg: #EEECEA;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(247,245,240,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* MAIN LAYOUT */
+    main { padding-top: 60px; max-width: 860px; margin: 0 auto; padding-left: 2.5rem; padding-right: 2.5rem; }
+
+    /* HERO */
+    .hero {
+      padding: 7rem 0 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.72rem 1.75rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(26,26,24,0.3); }
+
+    /* SECTIONS */
+    section { padding: 4.5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .about-text p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.85rem;
+    }
+    .stats {
+      display: flex; flex-direction: column; gap: 1.25rem;
+    }
+    .stat-item {
+      padding: 1.25rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .stat-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: rgba(26,26,24,0.25); }
+    .skill-icon {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .skill-card h3 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .skill-card p {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* PROJECTS */
+    .project-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: rgba(26,26,24,0.25);
+      background: #FDFDFC;
+    }
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+    .project-card p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      padding: 0.25rem 0.65rem;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+    .project-arrow {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      transition: transform 0.2s;
+    }
+    .project-card:hover .project-arrow { transform: translate(2px, -2px); }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .exp-meta { padding-top: 0.1rem; }
+    .exp-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+    .exp-company {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .exp-content h3 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .exp-content p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* CONTACT */
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .contact-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .contact-left p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 380px;
+      line-height: 1.75;
+    }
+    .contact-links {
+      display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end;
+    }
+    .contact-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label  { animation: fadeUp 0.5s ease both; animation-delay: 0.1s; }
+    .hero h1     { animation: fadeUp 0.5s ease both; animation-delay: 0.2s; }
+    .hero-desc   { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+    .hero-cta    { animation: fadeUp 0.5s ease both; animation-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      nav { padding: 0 1.25rem; }
+      main { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .contact-inner { flex-direction: column; align-items: flex-start; }
+      .contact-links { align-items: flex-start; }
+      footer { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">S.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="hero">
+      <p class="hero-label">DevOps & Cloud Engineer — Mumbai, IN</p>
+      <h1>Building <em>reliable</em><br>systems at scale.</h1>
+      <p class="hero-desc">
+        I design and operate cloud infrastructure for BFSI environments — where uptime is non-negotiable and every alert matters.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#projects">View Projects</a>
+        <a class="btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <p class="section-label">01 — About</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Engineer by day,<br>builder always.</h2>
+          <p>
+            With 2+ years of hands-on experience in production DevOps for banking environments, I monitor microservices, manage Elastic Stack pipelines, and maintain the infrastructure that millions of transactions depend on.
+          </p>
+          <p>
+            Currently pursuing AWS SAA-C03 certification and expanding into Kubernetes, CI/CD pipelines, and Azure — with a portfolio to match.
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <div class="stat-num">2+</div>
+            <div class="stat-desc">Years in production BFSI environments</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">AWS</div>
+            <div class="stat-desc">SAA-C03 in progress — 90% on Week 1 quiz</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">ELK</div>
+            <div class="stat-desc">Elastic Stack log monitoring & alerting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <p class="section-label">02 — Skills</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <span class="skill-icon">☁</span>
+          <h3>Cloud & AWS</h3>
+          <p>EC2, S3, Lambda, Route 53, IAM, VPC — building resilient and cost-efficient cloud architectures.</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">⚙</span>
+          <h3>DevOps Tooling</h3>
+          <p>Docker, Kubernetes, Jenkins CI/CD, Git workflows, and shell scripting for automation.</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">📊</span>
+          <h3>Observability</h3>
+          <p>Elastic Stack (ELK), Kibana dashboards, log aggregation, and alerting for production microservices.</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🔒</span>
+          <h3>Security & Networking</h3>
+          <p>Bastion hosts, multi-hop SSH, ProxyJump, SSL/TLS, VPN setup in private subnet environments.</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🐍</span>
+          <h3>Scripting & Dev</h3>
+          <p>Python, Bash, Java basics — building tools, log generators, and automation scripts.</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🗄</span>
+          <h3>Databases & Storage</h3>
+          <p>Oracle SQL, Elasticsearch, RDS — query tuning, indexing, and storage optimization strategies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <p class="section-label">03 — Projects</p>
+      <div class="project-list">
+
+        <div class="project-card">
+          <div>
+            <h3>Kibana Alert Simulator</h3>
+            <p>A Docker-based log generation environment that simulates real-world microservice traffic — including HTTP status distributions, error patterns, and structured JSON log output — to test Kibana alerting rules without production risk.</p>
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Elasticsearch</span>
+              <span class="tag">Kibana</span>
+              <span class="tag">Python</span>
+              <span class="tag">BFSI</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <h3>AWS Lambda Log Analytics</h3>
+            <p>Serverless log processing pipeline built on Lambda and CloudWatch Logs Insights — parsing application events, surfacing error trends, and publishing metrics to dashboards for real-time operational visibility.</p>
+            <div class="tags">
+              <span class="tag">AWS Lambda</span>
+              <span class="tag">CloudWatch</span>
+              <span class="tag">Python</span>
+              <span class="tag">Serverless</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <h3>CI/CD Pipeline — Node.js</h3>
+            <p>End-to-end Jenkins pipeline for a Node.js application: automated builds, test stages, Docker image packaging, and push to container registry with environment-specific deployment gates.</p>
+            <div class="tags">
+              <span class="tag">Jenkins</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">CI/CD</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <h3>Azure ARM Infrastructure</h3>
+            <p>Infrastructure-as-code deployment using ARM templates — provisioning VNets, virtual machines, and resilient storage on Azure with parameterised templates for multi-environment consistency.</p>
+            <div class="tags">
+              <span class="tag">Azure</span>
+              <span class="tag">ARM Templates</span>
+              <span class="tag">IaC</span>
+              <span class="tag">Networking</span>
+            </div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <p class="section-label">04 — Experience</p>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-year">2023 — Present</div>
+            <div class="exp-company">Clover InfoTech</div>
+          </div>
+          <div class="exp-content">
+            <h3>DevOps & Cloud Engineer (L2 Support)</h3>
+            <p>Production monitoring of microservices for Yes Bank using Elastic Stack. Managing incident response, log analysis, and environment health. Building documentation and mentoring new joiners while actively transitioning into dedicated DevOps engineering.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-year">2022 — 2023</div>
+            <div class="exp-company">CBS Team</div>
+          </div>
+          <div class="exp-content">
+            <h3>Application Support — Java & Elastic Stack</h3>
+            <p>Java application support for a customer onboarding platform in banking. Used Elastic Stack for log monitoring and fault detection. Gained strong foundations in BFSI operations, Oracle SQL debugging, and structured incident management.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-label">05 — Contact</p>
+      <div class="contact-inner">
+        <div class="contact-left">
+          <h2>Let's build<br>something solid.</h2>
+          <p>Open to DevOps and Cloud Engineering roles. If you're looking for someone who takes reliability seriously — let's talk.</p>
+        </div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:satvik@email.com">✉ satvik@email.com</a>
+          <a class="contact-link" href="https://linkedin.com/in/satvik" target="_blank">↗ linkedin.com/in/satvik</a>
+          <a class="contact-link" href="https://github.com/satvik" target="_blank">↗ github.com/satvik</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Satvik Mayuresh</p>
+    <p>Kalwa, IN</p>
+  </footer>
+
+</body>
+</html>
